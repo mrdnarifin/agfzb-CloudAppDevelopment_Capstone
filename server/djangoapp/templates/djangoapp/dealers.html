@@ -1,0 +1,26 @@
+{% extends "djangoapp/index.html" %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+    {% for dealer in dealers %}
+        <div class="col-sm-3 mt-3">
+          <div class="card border-primary mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ dealer.short_name }}</h5>
+              <hr>
+              <p class="card-text">
+                  {{ dealer.address }}<br>
+                  {{ dealer.city }}<br>
+                  {{ dealer.st }}<br>
+                  {{ dealer.zip }}<br>
+              </p>
+              <a href="{% url 'djangoapp:dealer_details' dealer.id %}" class="btn btn-primary btn-block">Detail</a>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
