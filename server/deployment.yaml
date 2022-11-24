@@ -5,6 +5,7 @@ metadata:
     run: dealership
   name: dealership
 spec:
+  terminationGracePeriodSeconds: 30
   replicas: 1
   selector:
     matchLabels:
@@ -20,7 +21,7 @@ spec:
         run: dealership
     spec:
       containers:
-      - image: us.icr.io/sn-labs-mrdnarifin/dealership:v2
+      - image: us.icr.io/sn-labs-mrdnarifin/dealership:v4
         imagePullPolicy: Always
         name: dealership
         ports:
