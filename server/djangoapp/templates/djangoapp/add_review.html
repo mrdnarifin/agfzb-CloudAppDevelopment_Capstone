@@ -9,18 +9,19 @@
   <form action="{% url 'djangoapp:add_review' dealer.id %}" method="post">
     {% csrf_token %}
     <div class="form-group">
-      <label for="purchase"><b>Have you purchase car from {{dealer.full_name}}?</b></label>
+        <label for="review"><b>Enter the review content:</b></label>
+        <textarea class="form-control" id="review" name="review" rows="3" required placeholder="This is a great car dealer"></textarea>
+      </div>
+    <div class="form-group">
+      <label for="purchase"><b>Has you purchased the car from {{dealer.full_name}}?</b></label>
+      <label class="text-muted">(select purchased car information below if checked)</label>
       <div class="form-check">
         <input type="checkbox" class="form-check-input" id="purchase" name="purchase">
         <label class="form-check-label" for="exampleCheck1">Yes</label>
       </div>
     </div>
     <div class="form-group">
-        <label for="firstname"><b>When:</b></label>
-        <input type="date" class="form-control" id="purchase_date" name="purchase_date">
-      </div>
-      <div class="form-group">
-        <label for="lastname"><b>Which Model:</b></label>
+        <label for="lastname"><b>Select you car (model-make-year):</b></label>
         <select class="form-control" id="model" name="model">
                 <option value="">Select Model</option>
                 {% for car in cars %}
@@ -29,11 +30,18 @@
           </select>
       </div>
     <div class="form-group">
-      <label for="review">Review</label>
-      <textarea class="form-control" id="review" name="review" rows="3" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign Up</button>
+        <label for="firstname"><b>Select Your Purchase Date:</b></label>
+        <input type="date" class="form-control" id="purchase_date" name="purchase_date">
+      </div>
+      
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
 </div>
+<script type="text/javascript">
+    $('.purchase_date').datepicker({
+       format: 'mm/dd/yyyy'
+     });
+</script>
 {% endblock %}

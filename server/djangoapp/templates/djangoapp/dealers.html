@@ -3,24 +3,36 @@
 {% block content %}
 <div class="container mt-3">
     <div class="row">
-    {% for dealer in dealers %}
-        <div class="col-sm-3 mt-3">
-          <div class="card border-primary mb-3">
-            <div class="card-body">
-              <h5 class="card-title">{{ dealer.short_name }}</h5>
-              <hr>
-              <p class="card-text">
-                  {{ dealer.address }}<br>
-                  {{ dealer.city }}<br>
-                  {{ dealer.st }}<br>
-                  {{ dealer.zip }}<br>
-              </p>
-              <a href="{% url 'djangoapp:dealer_details' dealer.id %}" class="btn btn-success btn-block">Reviews</a>
-            </div>
-          </div>
-        </div>
-    {% endfor %}
+        <table class="table" id="table" data-filter-control="true">
+            <thead>
+                <tr>
+                    <th data-field="id">ID</th>
+                    <th data-field="Dealer Name">Dealer Name</th>
+                    <th data-field="City">City</th>
+                    <th data-field="Address">Address</th>
+                    <th data-field="Zip">Zip</th>
+                    <th data-field="state" data-filter-control="select">State</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dealer in dealers %}
+                    <tr>
+                        <td>{{dealer.id}}</td>
+                        <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
+                        <td>{{dealer.city}}</td>
+                        <td>{{dealer.address}}</td>
+                        <td>{{dealer.zip}}</td>
+                        <td>{{dealer.st}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
+<script>
+    $(function() {
+      $('#table').bootstrapTable()
+    })
+  </script>
 {% endblock %}
 
