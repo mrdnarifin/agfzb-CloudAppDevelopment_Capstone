@@ -27,7 +27,9 @@
         {% endfor %}
     </div>
     <hr>
+    {% if user.is_authenticated %}
     <a href="{% url 'djangoapp:add_review' dealer.id %}" class="btn btn-primary">Add Review</a>
+    {% endif %}
 </div>
 {% endblock %}
 
