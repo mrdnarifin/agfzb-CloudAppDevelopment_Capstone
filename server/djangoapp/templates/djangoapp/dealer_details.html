@@ -1,18 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dealership Review</title>
-    {% load static %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
+{% extends "djangoapp/index.html" %}
 
-    <body>
+{% block content %}
+<div class="container mt-3">
+    <h3>{{dealer.full_name}} Reviews :</h3>
+    <hr>
+    <div class="row">
 
-    <!--Add a nav bar here -->
+        {% for dealer in dealer_reviews %}
+        <div class="col-sm-3 mt-3">
+        <div class="card {{ dealer.card_class }} mb-3" style="max-width: 18rem;">
+            <div class="card-header">{{ dealer.name }}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ dealer.car_make }}</h5>
+              <p class="card-text">{{ dealer.review }}</p>
+              {% if dealer.purchase %}
+                <span class="badge badge-primary">Purchased</span>
+                <span class="badge badge-info">{{dealer.car_model}}</span>
+                <span class="badge badge-info">{{dealer.car_year}}</span>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+    </div>
+    <hr>
+    <a href="{% url 'djangoapp:add_review' dealer.id %}" class="btn btn-primary">Add Review</a>
+</div>
+{% endblock %}
 
-    <!-- Add reviews as cards -->
-
-    </body>
-
-</html>

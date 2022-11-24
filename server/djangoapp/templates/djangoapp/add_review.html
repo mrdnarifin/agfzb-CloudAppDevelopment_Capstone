@@ -1,16 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+{% extends "djangoapp/index.html" %}
 
-</head>
-    <body>
-    <!--Add review form here -->
-    </body>
-</html>
+{% block content %}
+
+<div class="container" style="margin-top: 30px">
+    <div class="col-lg-12">
+<h3>Add review for {{ dealer.full_name }}</h3>
+<hr>
+  <form action="{% url 'djangoapp:add_review' dealer.id %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="purchase"><b>Have you purchase car from {{dealer.full_name}}?</b></label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="purchase" name="purchase">
+        <label class="form-check-label" for="exampleCheck1">Yes</label>
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="firstname"><b>When:</b></label>
+        <input type="date" class="form-control" id="purchase_date" name="purchase_date">
+      </div>
+      <div class="form-group">
+        <label for="lastname"><b>Which Model:</b></label>
+        <select class="form-control" id="model" name="model">
+                <option value="">Select Model</option>
+                {% for car in cars %}
+                    <option value={{car.id}}>{{ car.name }} - {{ car.type_c }} - {{ car.year|date:"Y" }}</option>
+                {% endfor %}
+          </select>
+      </div>
+    <div class="form-group">
+      <label for="review">Review</label>
+      <textarea class="form-control" id="review" name="review" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </form>
+</div>
+</div>
+{% endblock %}
