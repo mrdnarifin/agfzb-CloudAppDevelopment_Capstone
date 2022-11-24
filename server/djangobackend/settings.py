@@ -27,8 +27,8 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["localhost"]
-
+ALLOWED_HOSTS = ['localhost', 'localhost:8000', 'https://us-south.functions.appdomain.cloud/*', 'https://*.127.0.0.1','https://mrdnarifin-8000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai']  
+CSRF_TRUSTED_ORIGINS = ['https://mrdnarifin-8000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai','https://*.127.0.0.1','https://us-south.functions.appdomain.cloud/*',]
 
 # Application definition
 
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'djangoapp.apps.DjangoappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
+    "whitenoise.runserver_nostatic",
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -125,3 +127,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 MEDIA_URL = '/media/'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
